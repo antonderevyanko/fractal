@@ -31,16 +31,17 @@ class FractalPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.0;
 
-    final mainTriangleSize = 200;
+    final mainTriangleSize = 150.0;
+    final bottomDelta = mainTriangleSize * math.sqrt(3) / 2.0;
 
-    final pointAx = -math.Random().nextInt(mainTriangleSize).toDouble();
-    final pointAy = -math.Random().nextInt(mainTriangleSize).toDouble();
+    final pointAx = -mainTriangleSize;
+    final pointAy = bottomDelta;
 
-    final pointBx = math.Random().nextInt(mainTriangleSize).toDouble();
-    final pointBy = -math.Random().nextInt(mainTriangleSize).toDouble();
+    final pointBx = 0.0;
+    final pointBy = bottomDelta - mainTriangleSize * math.sqrt(3);
 
-    final pointCx = 0.0;
-    final pointCy = math.Random().nextInt(mainTriangleSize).toDouble();
+    final pointCx = mainTriangleSize;
+    final pointCy = bottomDelta;
 
     // draw base points
     canvas.drawCircle(Offset(pointAx, pointAy), 6.0, triangleDotPaint);
@@ -51,14 +52,14 @@ class FractalPainter extends CustomPainter {
     canvas.drawLine(Offset(0, -100), Offset(0, 100), linesPaint);
 
     // we need first point to start
-    final int pointX =
-        mainTriangleSize - math.Random().nextInt(2 * mainTriangleSize);
-    final int pointY =
-        mainTriangleSize - math.Random().nextInt(2 * mainTriangleSize);
+    final int pointX = mainTriangleSize.toInt() -
+        math.Random().nextInt(2 * mainTriangleSize.toInt());
+    final int pointY = mainTriangleSize.toInt() -
+        math.Random().nextInt(2 * mainTriangleSize.toInt());
     Offset point = Offset(pointX.toDouble(), pointY.toDouble());
     canvas.drawCircle(point, 4.0, dotPaint);
 
-    for (var i = 0; i < 2000; i++) {
+    for (var i = 0; i < 1000; i++) {
       final pointToSeek = math.Random().nextInt(3);
       switch (pointToSeek) {
         case 0:
