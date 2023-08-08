@@ -3,16 +3,12 @@ import 'dart:math' as math;
 
 class Postman extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: FractalPainter(),
-    );
-  }
+  Widget build(BuildContext context) => CustomPaint(
+        painter: FractalPainter(),
+      );
 }
 
 class FractalPainter extends CustomPainter {
-  double rotationFactor;
-
   @override
   void paint(Canvas canvas, Size size) {
     Paint triangleDotPaint = Paint()

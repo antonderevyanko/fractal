@@ -7,39 +7,37 @@ class Postman extends StatefulWidget {
 }
 
 class _PostmanState extends State<Postman> with SingleTickerProviderStateMixin {
-  AnimationController animationController;
-  Animation animation;
+  AnimationController? animationController;
+  Animation? animation;
 
   @override
   void initState() {
     animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 4));
     animation = Tween<double>(begin: 0, end: 2).animate(
-        CurvedAnimation(parent: animationController, curve: Curves.linear));
+        CurvedAnimation(parent: animationController!, curve: Curves.linear));
 
-    animation.addListener(() {
+    animation!.addListener(() {
       setState(() {});
     });
 
-    animationController
+    animationController!
         .forward()
-        .whenComplete(() => animationController.repeat());
+        .whenComplete(() => animationController!.repeat());
 
     super.initState();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: PostmanPainter(rotationFactor: animation.value),
-    );
-  }
+  Widget build(BuildContext context) => CustomPaint(
+        painter: PostmanPainter(rotationFactor: animation!.value),
+      );
 }
 
 class PostmanPainter extends CustomPainter {
   double rotationFactor;
 
-  PostmanPainter({this.rotationFactor});
+  PostmanPainter({required this.rotationFactor});
 
   @override
   void paint(Canvas canvas, Size size) {
